@@ -48,7 +48,4 @@
     <AndroidResource Include="Resources\xml\*.xml" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ColorPicker\" />
-  </ItemGroup>
 </Project>
