@@ -1,4 +1,8 @@
-# DSoft.XamarinForms.ColorPicker
-Color picker views and popups for Xamarin Forms using SkiaSharp
+# DSoft.XamarinForms.Controls
+Controls library for Xamarin.Forms
 
-Based on https://github.com/zhenweied09/ColorPickers (@zhenweied09)  and https://github.com/simonscoffins/color-picker (@simonscoffins)
+ - Color pickers
+   - ColorWheelView
+   - Color picker views and popups for Xamarin Forms using SkiaSharp
+
+Colors pickers based on work from  https://github.com/zhenweied09/ColorPickers (@zhenweied09)  and https://github.com/simonscoffins/color-picker (@simonscoffins)
