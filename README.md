@@ -2,9 +2,12 @@
 Controls library for Xamarin.Forms
 
  - Color pickers
-   - ColorWheelView
+   - `ColorWheelView` and `ColorPickerView`
    - Color picker views and popups for Xamarin Forms using SkiaSharp
- - Gradient View
+ - GradientFrame
+   - Draw a simple to color linear gradient
+ - RepeaterView
+   - Simple StackLayout derivative for showing lists
  - TouchEffect
 
 
@@ -22,8 +25,11 @@ Both color picker repos from zhenweied09 and simonscoffins where designed around
    - This allows selection of white from the picker and allows lighter versions of colors to be picked
    - Can be disabled by setting `ShowWhite` to false
  - Changed the size of the selector indicator and made it twice the size
- 
 
-  
+
+## Attribution
 
 Colors pickers based on work from  https://github.com/zhenweied09/ColorPickers (@zhenweied09)  and https://github.com/simonscoffins/color-picker (@simonscoffins)
+
+Repeater view is based on work from (@webmasterdevlin) 
+https://github.com/webmasterdevlin/RepeaterViewDemo/blob/master/RepeaterViewDemo/RepeaterViewDemo/RepeaterView.cs
