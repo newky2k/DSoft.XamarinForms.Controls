@@ -6,6 +6,18 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>DSoft.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/newky2k/DSoft.XamarinForms.Controls</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/newky2k/DSoft.XamarinForms.Controls</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Copyright>Copyright © 2019 DSoft</Copyright>
+    <Description>Controls and Views for Xamarin.Forms
+
+</Description>
+    <Authors>newky2k</Authors>
+    <Company>newky2k</Company>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
     <DebugSymbols>true</DebugSymbols>
