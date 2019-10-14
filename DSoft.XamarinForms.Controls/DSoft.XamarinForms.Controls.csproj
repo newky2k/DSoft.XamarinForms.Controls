@@ -17,17 +17,15 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>4.2.0.848062</Version>
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062">
     </PackageReference>
-    <PackageReference Include="Rg.Plugins.Popup">
-      <Version>1.2.0.223</Version>
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223">
     </PackageReference>
-    <PackageReference Include="SkiaSharp">
-      <Version>1.68.0</Version>
+    <PackageReference Include="SkiaSharp" Version="1.68.0">
     </PackageReference>
     <Compile Include="**\*.shared.cs" />
     <Compile Include="**\*.shared.*.cs" />
+
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
     <Compile Include="**\*.netstandard.cs" />

@@ -2,6 +2,8 @@
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DSoft.XamarinForms.Controls.Extensions
 {
@@ -21,5 +23,18 @@ namespace DSoft.XamarinForms.Controls.Extensions
                                         Math.Pow((location.Y - center.Y), 2f));
             return distance < radius;
         }
-    }
+
+		public static SKColor[] ToSKColors(this IEnumerable<Color> colors)
+		{
+			var skColors = new List<SKColor>();
+
+			if (colors == null || !colors.Any())
+				throw new ArgumentException("Colors array must not be null or empty");
+
+			foreach (var aCol in colors)
+				skColors.Add(aCol.ToSKColor());
+
+			return skColors.ToArray();
+		}
+	}
 }

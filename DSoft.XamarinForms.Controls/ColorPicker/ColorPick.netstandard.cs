@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace DSoft.XamarinForms.Controls.ColorPicker
 {
-    public class ColorPick
+    internal class ColorPick
     {
 
         public ColorPick(string hex)
@@ -12,7 +12,12 @@ namespace DSoft.XamarinForms.Controls.ColorPicker
             Color = Color.FromHex(hex);
         }
 
-        public Color Color { get; set; }
+		public ColorPick(Color color)
+		{
+			Color = color;
+		}
+
+		public Color Color { get; set; }
         public int Radius { get; set; }
         public SKPoint Position { get; set; }
 
@@ -22,5 +27,13 @@ namespace DSoft.XamarinForms.Controls.ColorPicker
             return (Math.Pow(pt.X - Position.X, 2) / Math.Pow(Radius, 2) +
                     Math.Pow(pt.Y - Position.Y, 2) / Math.Pow(Radius, 2)) < 1;
         }
-    }
+
+		public bool IsWhite
+		{
+			get
+			{
+				return Color.Equals(Color.White);
+			}
+		}
+	}
 }
