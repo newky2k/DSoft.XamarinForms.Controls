@@ -11,9 +11,9 @@ namespace DSoft.XamarinForms.Controls.TouchTracking
         /// Resolves the effect with its platform implementation
         /// </summary>
         /// <returns></returns>
-        public static Effect Build()
+        public static TouchEffect Build()
         {
-            return Effect.Resolve(effectId);
+            return (TouchEffect)Effect.Resolve(effectId);
         }
 
         public event TouchActionEventHandler TouchAction;
