@@ -13,9 +13,16 @@
     <RepositoryUrl>https://github.com/newky2k/DSoft.XamarinForms.Controls</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <Copyright>Copyright © 2019 DSoft</Copyright>
-    <Description>Controls and Views for Xamarin.Forms
+    <Description>Controls and Views for Xamarin.Forms  
 
-</Description>
+    Features:
+
+      - Color Picker and Color Wheel Views
+      - Gradient Frame
+      - TouchEffect for iOS, Android and UWP
+      - Single multi-targeting package
+
+    </Description>
     <Authors>newky2k</Authors>
     <Company>newky2k</Company>
     <PackageReleaseNotes>Initial Release Preview</PackageReleaseNotes>
