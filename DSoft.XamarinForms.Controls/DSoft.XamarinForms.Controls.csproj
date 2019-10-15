@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;uap10.0.16299;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;</TargetFrameworks>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>DSoft.snk</AssemblyOriginatorKeyFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>DSoft.XamarinForms.Controls</AssemblyName>
+    <RootNamespace>DSoft.XamarinForms.Controls</RootNamespace>
+    <PackageId>DSoft.XamarinForms.Controls</PackageId>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/newky2k/DSoft.XamarinForms.Controls</PackageProjectUrl>
@@ -26,6 +26,13 @@
     <Authors>newky2k</Authors>
     <Company>newky2k</Company>
     <PackageReleaseNotes>Initial Release Preview</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>7.3</LangVersion>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Configurations>Debug;Release</Configurations>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +46,8 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
     <Compile Include="**\*.shared.cs" />
     <Compile Include="**\*.shared.*.cs" />
   </ItemGroup>
@@ -46,33 +55,19 @@
     <Compile Include="**\*.netstandard.cs" />
     <Compile Include="**\*.netstandard.*.cs" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062">
-    </PackageReference>
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="**\*.ios.cs" />
     <Compile Include="**\*.ios.*.cs" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062">
-    </PackageReference>
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
     <Compile Include="**\*.uwp.cs" />
     <Compile Include="**\*.uwp.*.cs" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062">
-    </PackageReference>
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="**\*.android.cs" />
     <Compile Include="**\*.android.*.cs" />
     <AndroidResource Include="Resources\xml\*.xml" />
-    <PackageReference Include="SkiaSharp" Version="1.68.0">
-    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062">
-    </PackageReference>
   </ItemGroup>
 </Project>
