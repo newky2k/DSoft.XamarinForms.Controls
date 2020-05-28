@@ -16,6 +16,7 @@ namespace DSoft.XamarinForms.Controls
             CornerRadius = 20,
             HasShadow = false,
             BackgroundColor = Color.Transparent,
+            
         };
 
         public double CurrentSweep => EndAngle * (Percent / 100);
@@ -173,7 +174,11 @@ namespace DSoft.XamarinForms.Controls
 
             _canvasView.PaintSurface += OnPaintSurface;
 
-            var grid = new Grid();
+            var grid = new Grid()
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
+            };
             grid.Children.Add(_canvasView);
             grid.Children.Add(_container);
 

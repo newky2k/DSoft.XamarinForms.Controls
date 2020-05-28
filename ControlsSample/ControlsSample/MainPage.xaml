@@ -3,14 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:DSoft.XamarinForms.Controls;assembly=DSoft.XamarinForms.Controls"
              mc:Ignorable="d"
              x:Class="ControlsSample.MainPage">
 
-    <StackLayout>
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="300">
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <controls:SimpleRadialGuageView WidthRequest="200"
+                                        HeightRequest="200"
+                                        Percent="10"
+                                        ScaleBackgroundColor="Pink"
+                                        ScaleForegroundColor="Red"
+                                        ScaleBackgroundLineWidth="5"
+                                        ScaleForegroundLineWidth="5">
+            <controls:SimpleRadialGuageView.CenterContent>
+                <Grid BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Hello" />
+                </Grid>
+            </controls:SimpleRadialGuageView.CenterContent>
+        </controls:SimpleRadialGuageView>
+
+        <controls:SimpleDonutGuageView WidthRequest="200"
+                                        HeightRequest="200"
+                                        Percent="10"
+                                        ScaleBackgroundColor="LightBlue"
+                                        ScaleForegroundColor="DarkSlateBlue"
+                                        ScaleBackgroundLineWidth="20"
+                                        ScaleForegroundLineWidth="20" />
     </StackLayout>
 
 </ContentPage>

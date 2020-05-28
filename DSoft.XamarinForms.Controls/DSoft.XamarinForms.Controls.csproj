@@ -57,6 +57,9 @@
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.3" />
     <Compile Include="**\*.shared.cs" />
     <Compile Include="**\*.shared.*.cs" />
+    <Compile Include="SimpleDonutGuageView.cs">
+      <SubType></SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
     <Compile Include="**\*.netstandard.cs" />
