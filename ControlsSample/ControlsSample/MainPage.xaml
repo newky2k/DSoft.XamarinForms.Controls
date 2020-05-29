@@ -9,7 +9,7 @@
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="300">
         <!-- Place new controls here -->
-        <controls:RingChartView WidthRequest="300" HeightRequest="300" />
+        <controls:RingChartView WidthRequest="260" HeightRequest="260" />
         <!--<controls:SimpleRadialGuageView WidthRequest="200"
                                         HeightRequest="200"
                                         Percent="10"
