@@ -9,7 +9,8 @@
 
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="300">
         <!-- Place new controls here -->
-        <controls:SimpleRadialGuageView WidthRequest="200"
+        <controls:RingChartView WidthRequest="300" HeightRequest="300" />
+        <!--<controls:SimpleRadialGuageView WidthRequest="200"
                                         HeightRequest="200"
                                         Percent="10"
                                         ScaleBackgroundColor="Pink"
@@ -29,7 +30,7 @@
                                         ScaleBackgroundColor="LightBlue"
                                         ScaleForegroundColor="DarkSlateBlue"
                                         ScaleBackgroundLineWidth="20"
-                                        ScaleForegroundLineWidth="20" />
+                                        ScaleForegroundLineWidth="20" />-->
     </StackLayout>
 
 </ContentPage>
