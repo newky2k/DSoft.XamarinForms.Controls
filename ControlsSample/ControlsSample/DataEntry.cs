@@ -11,7 +11,7 @@ namespace ControlsSample
 
 		public string Label { get; set; }
 
-		public Color Color { get; set; }
+		public Color? Color { get; set; }
 
 		public DataEntry()
 		{

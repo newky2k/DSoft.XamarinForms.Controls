@@ -13,7 +13,7 @@ namespace ControlsSample
     [DesignTimeVisible(false)]
 	public partial class MainPage : ContentPage
     {
-		private IEnumerable<DataEntry> _data;
+        private IEnumerable<DataEntry> _data = new List<DataEntry>();
 
 		public IEnumerable<DataEntry> Data
 		{
@@ -23,6 +23,8 @@ namespace ControlsSample
 		public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = this;
 
 			Data = new List<DataEntry>()
                 {

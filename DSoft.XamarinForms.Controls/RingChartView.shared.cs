@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -9,6 +10,7 @@ namespace DSoft.XamarinForms.Controls
 	public class RingChartView : ContentView
 	{
         #region fields and Properties
+        private List<DataEntryInternal> _internalData = new List<DataEntryInternal>();
 
         private double StartAngle = 270;
         private double EndAngle = 360;
@@ -62,6 +64,35 @@ namespace DSoft.XamarinForms.Controls
         }
 
         #endregion
+
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
+            typeof(IList),
+            typeof(RingChartView),
+            null,
+            BindingMode.OneWay,
+            propertyChanged: ItemsChanged);
+
+        public IList ItemsSource
+        {
+            get => GetValue(ItemsSourceProperty) as IList;
+            set => SetValue(ItemsSourceProperty, value);
+        }
+
+        private static void ItemsChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+
+
+            if (!(bindable is RingChartView))
+                return;
+
+            RingChartView self = bindable as RingChartView;
+            
+
+            self?.UpdateInternalData((IList)newValue);
+
+
+            self?._canvasView.InvalidateSurface();
+        }
 
         #endregion
         public RingChartView()
@@ -118,9 +149,9 @@ namespace DSoft.XamarinForms.Controls
 
             //var percentages = new double[] { 62.7, 29.5, 85.2, 45.6};
 
-            var percentages = new double[] { 45.6, 85.2, 29.5, 62.7 };
+            //var percentages = new double[] { 45.6, 85.2, 29.5, 62.7 };
 
-            var itemCount = percentages.Length * 2;
+            var itemCount = _internalData.Count * 2;
 
             var maxlineWidth = 15;//initialRadius / ((itemCount * 2));
 
@@ -146,12 +177,16 @@ namespace DSoft.XamarinForms.Controls
                 Color.FromHex("47ba9f"),
             };
 
-            for (var loop = 0; loop < percentages.Length; loop++)
+            for (var loop = 0; loop < _internalData.Count; loop++)
 			{
-                var foreColor = colors[loop];// Color.FromHex("#22b9e2");
+                var currenEntry = _internalData[loop];
+
+                var foreColor = (currenEntry.Color.HasValue) ? currenEntry.Color.Value : colors[loop];
+
+                //var foreColor = colors[loop];// Color.FromHex("#22b9e2");
                 var backColor = (UseShadedRingColor == true) ? Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f) : RingBackgroundColor;
 
-                DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, percentages[loop]);
+                DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, currenEntry.Percent);
 
                 rect.Inflate(new SKSize(-(maxlineWidth * 2), -(maxlineWidth * 2)));
             }
@@ -227,6 +262,85 @@ namespace DSoft.XamarinForms.Controls
 
                 canvas.DrawPath(path, ArcPaint);
             }
+        }
+
+        private void UpdateInternalData(IList data)
+		{
+            _internalData = new List<DataEntryInternal>();
+
+            if (data == null || data.Count == 0)
+                return;
+
+            //work in reverse
+            for (var loop = (data.Count - 1); loop > -1; loop--)
+			{
+                var item = data[loop];
+
+                var percentProp = item.GetType().GetProperty("Percent");
+                var valueProp = item.GetType().GetProperty("Value");
+                var labelProp = item.GetType().GetProperty("Label");
+                var colorProp = item.GetType().GetProperty("Color");
+
+                double realPerValue = 0;
+                double realValue = 0;
+                string realLabel = string.Empty;
+                Color? realColor = null;
+
+                if (percentProp != null && percentProp.PropertyType.Equals(typeof(double)))
+                {
+                    var percValue = percentProp.GetValue(item);
+
+                    realPerValue = (double)percValue;
+                }
+
+                if (valueProp != null && valueProp.PropertyType.Equals(typeof(double)))
+				{
+                    var valValue = valueProp.GetValue(item);
+
+                    realValue = (double)valValue;
+                }
+
+                if (labelProp != null && labelProp.PropertyType.Equals(typeof(string)))
+                {
+                    var labValue = labelProp.GetValue(item);
+
+                    realLabel = labValue as string;
+                }
+
+                if (colorProp != null && colorProp.PropertyType.Equals(typeof(Color?)))
+                {
+                    var labValue = colorProp.GetValue(item);
+
+                    if (labValue != null)
+                        realColor = (Color)labValue;
+                }
+                else if (colorProp != null && colorProp.PropertyType.Equals(typeof(Color)))
+                {
+                    var labValue = colorProp.GetValue(item);
+
+                    realColor = (Color)labValue;
+                }
+
+
+                _internalData.Add(new DataEntryInternal()
+                {
+                    Percent = realPerValue,
+                    Value = realValue,
+                    Label = realLabel,
+                    Color = realColor,
+                });
+            }
+
+        }
+		private class DataEntryInternal
+		{
+            public double Percent { get; set; }
+
+            public double Value { get; set; }
+
+            public string Label { get; set; }
+
+            public Color? Color { get; set; }
         }
     }
 }
