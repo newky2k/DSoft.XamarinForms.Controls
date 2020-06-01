@@ -63,9 +63,12 @@ namespace DSoft.XamarinForms.Controls
             set => SetValue(CenterViewProperty, value);
         }
 
-        #endregion
+		#endregion
 
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
+		#region ItemsSource
+
+
+		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
             typeof(IList),
             typeof(RingChartView),
             null,
@@ -94,6 +97,21 @@ namespace DSoft.XamarinForms.Controls
             self?._canvasView.InvalidateSurface();
         }
 
+        #endregion
+
+
+        #region Color Palette
+
+        public static readonly BindableProperty ColorPaletteProperty = BindableProperty.Create(
+                            nameof(ColorPalette), typeof(IList<Color>), typeof(RingChartView), InternalColorModel.DefaultColors, propertyChanged: null);
+
+        public IList<Color> ColorPalette
+        {
+            get => (IList<Color>)GetValue(ColorPaletteProperty);
+            set => SetValue(ColorPaletteProperty, value);
+        }
+
+        #endregion
         #endregion
         public RingChartView()
 		{
@@ -147,13 +165,9 @@ namespace DSoft.XamarinForms.Controls
 
             var initialRadius = Math.Min(surfaceHeight, surfaceWidth);
 
-            //var percentages = new double[] { 62.7, 29.5, 85.2, 45.6};
-
-            //var percentages = new double[] { 45.6, 85.2, 29.5, 62.7 };
-
             var itemCount = _internalData.Count * 2;
 
-            var maxlineWidth = 15;//initialRadius / ((itemCount * 2));
+            var maxlineWidth = 10;
 
             var buffer = maxlineWidth;
 
@@ -166,24 +180,13 @@ namespace DSoft.XamarinForms.Controls
             //Main rect
             var rect = new SKRect(backleft, backtop, backright, backbottom);
 
-            //var mainBackColor = Color.FromHex("#ebeced");
-
-            var colors = new List<Color>()
-            {
-                //Color.FromHex("#22b9e2"),
-                Color.FromHex("e56590"),
-                Color.FromHex("9686c9"),
-                Color.FromHex("e58870"),
-                Color.FromHex("47ba9f"),
-            };
 
             for (var loop = 0; loop < _internalData.Count; loop++)
 			{
                 var currenEntry = _internalData[loop];
 
-                var foreColor = (currenEntry.Color.HasValue) ? currenEntry.Color.Value : colors[loop];
+                var foreColor = (currenEntry.Color.HasValue) ? currenEntry.Color.Value : GetColor(loop);
 
-                //var foreColor = colors[loop];// Color.FromHex("#22b9e2");
                 var backColor = (UseShadedRingColor == true) ? Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f) : RingBackgroundColor;
 
                 DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, currenEntry.Percent);
@@ -191,9 +194,7 @@ namespace DSoft.XamarinForms.Controls
                 rect.Inflate(new SKSize(-(maxlineWidth * 2), -(maxlineWidth * 2)));
             }
             
-            
-
-            //DrawRing(canvas, rect, Color.FromHex("#343c44").ToSKColor(), Color.FromHex("#22b9e2").ToSKColor(), maxlineWidth, 67);
+           
         }
 
         private void DrawRing(SKCanvas canvas, SKRect rect, SKColor backcolor, SKColor foreColor, float lineWidth, double percent)
@@ -332,6 +333,15 @@ namespace DSoft.XamarinForms.Controls
             }
 
         }
+
+        private Color GetColor(int index)
+		{
+            if (index > (ColorPalette.Count - 1))
+                return Color.IndianRed;
+
+            return ColorPalette[index];
+        }
+		#region Internal classes
 		private class DataEntryInternal
 		{
             public double Percent { get; set; }
@@ -342,5 +352,39 @@ namespace DSoft.XamarinForms.Controls
 
             public Color? Color { get; set; }
         }
-    }
+
+        private class InternalColorModel
+		{
+            public static List<Color> DefaultColors
+			{
+                get
+                {
+                    var colors = new List<Color>()
+                                {
+                                    Color.FromHex("e56590"),
+                                    Color.FromHex("9686c9"),
+                                    Color.FromHex("e58870"),
+                                    Color.FromHex("47ba9f"),
+                                     Color.FromHex("2e2157"),
+                                      Color.FromHex("760f56"),
+
+                                    Color.FromHex("8d88cb"),
+                                    Color.FromHex("fdcc41"),
+                                    Color.FromHex("c33716"),
+                                    Color.FromHex("ff010b"),
+
+                                    Color.FromHex("7c3f09"),
+                                    Color.FromHex("739f46"),
+                                    Color.FromHex("6c4874"),
+                                    Color.FromHex("690102"),
+                                };
+
+                    return colors;
+                }
+			}
+		}
+
+		#endregion
+
+	}
 }

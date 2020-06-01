@@ -48,6 +48,41 @@ namespace ControlsSample
                         Percent = 45.6,
                         Label = "Nox",
                     },
+                     new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                      new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                       new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                    new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                      new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                       new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
+                       new DataEntry()
+                    {
+                        Percent = 12,
+                        Label = "Nox",
+                    },
                 };
         }
     }
