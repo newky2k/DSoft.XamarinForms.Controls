@@ -15,13 +15,16 @@ namespace DSoft.XamarinForms.Controls
         private double StartAngle = 270;
         private double EndAngle = 360;
 
-        private readonly SKCanvasView _canvasView = new SKCanvasView();
+        private readonly SKCanvasView _canvasView = new SKCanvasView()
+        {
+            BackgroundColor = Color.Transparent,
+        };
+
         private readonly Frame _container = new Frame()
         {
             CornerRadius = 20,
             HasShadow = false,
             BackgroundColor = Color.Transparent,
-
         };
 
         //public double CurrentSweep => EndAngle * (Percent / 100);
@@ -112,11 +115,24 @@ namespace DSoft.XamarinForms.Controls
         }
 
         #endregion
+
+        #region Max Line Size
+
+        public static readonly BindableProperty RingLineWidthProperty = BindableProperty.Create(
+                            nameof(RingLineWidth), typeof(double), typeof(RingChartView), 0d, propertyChanged: null);
+
+        public double RingLineWidth
+        {
+            get => (double)GetValue(RingLineWidthProperty);
+            set => SetValue(RingLineWidthProperty, value);
+        }
+
+        #endregion
         #endregion
         public RingChartView()
 		{
-            HorizontalOptions = LayoutOptions.Fill;
-            VerticalOptions = LayoutOptions.Fill;
+            HorizontalOptions = LayoutOptions.FillAndExpand;
+            VerticalOptions = LayoutOptions.FillAndExpand;
 
             _canvasView.PaintSurface += OnPaintSurface;
 
@@ -125,8 +141,10 @@ namespace DSoft.XamarinForms.Controls
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.Fill,
             };
-            grid.Children.Add(_canvasView);
+
+            
             grid.Children.Add(_container);
+            grid.Children.Add(_canvasView);
 
             this.Content = grid;
 
@@ -141,7 +159,7 @@ namespace DSoft.XamarinForms.Controls
             var newSize = this.Width - (this.Width / 3);
 
             _container.Content = CenterView;
-            _container.LayoutTo(new Rectangle(currentPosX - (newSize / 2), currentPosy - (newSize / 2), newSize, newSize), 0, Easing.Linear);
+            _container.LayoutTo(new Rectangle(currentPosX - (newSize / 2) + 1, currentPosy - (newSize / 2), newSize, newSize), 0, Easing.Linear);
         }
 
         private static void RedrawCanvas(BindableObject bindable, object oldvalue, object newvalue)
@@ -157,17 +175,31 @@ namespace DSoft.XamarinForms.Controls
             int surfaceWidth = args.Info.Width;
             int surfaceHeight = args.Info.Height;
 
+            var scale = args.Info.Width / this.Width;
+
             //clear the canvas
             canvas.Clear();
+
+            var innerWidth = 0d;
+            var innerHeight = 0d;
+
+            if (_container.Content != null)
+			{
+                innerWidth = _container.Content.Width * scale;
+                innerHeight = _container.Content.Height * scale;
+			}
 
             var centerx = surfaceWidth / 2;
             var centery = surfaceHeight / 2;
 
             var initialRadius = Math.Min(surfaceHeight, surfaceWidth);
+            var innerRadius = Math.Min(innerHeight, innerWidth);
 
             var itemCount = _internalData.Count * 2;
 
-            var maxlineWidth = 10;
+            var size = initialRadius - (innerRadius * 1.33);
+
+            var maxlineWidth = (RingLineWidth > 0) ? (float)RingLineWidth :  (float)(size / 2) / itemCount;
 
             var buffer = maxlineWidth;
 

@@ -169,8 +169,8 @@ namespace DSoft.XamarinForms.Controls
 
         public SimpleRadialGuageView()
         {
-            HorizontalOptions = LayoutOptions.Fill;
-            VerticalOptions = LayoutOptions.Fill;
+            HorizontalOptions = LayoutOptions.FillAndExpand;
+            VerticalOptions = LayoutOptions.FillAndExpand;
 
             _canvasView.PaintSurface += OnPaintSurface;
 

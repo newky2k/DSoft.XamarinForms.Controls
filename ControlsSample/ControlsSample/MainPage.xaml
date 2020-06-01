@@ -7,9 +7,9 @@
              mc:Ignorable="d"
              x:Class="ControlsSample.MainPage">
 
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="300">
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="320" HeightRequest="400">
         <!-- Place new controls here -->
-        <controls:RingChartView WidthRequest="300" HeightRequest="300" ItemsSource="{Binding Data}" >
+        <controls:RingChartView ItemsSource="{Binding Data}" RingLineWidth="15">
              <controls:RingChartView.CenterView>
                 <Grid BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="Hello" />
