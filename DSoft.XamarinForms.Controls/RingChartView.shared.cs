@@ -26,6 +26,44 @@ namespace DSoft.XamarinForms.Controls
 
         #endregion
 
+        #region Bindable Properties
+
+        #region ScaleBackgroundColor
+
+        public static readonly BindableProperty RingBackgroundColorProperty = BindableProperty.Create(
+           nameof(RingBackgroundColor), typeof(Color), typeof(RingChartView), Color.FromHex("#ebeced"), propertyChanged: RedrawCanvas);
+
+        public Color RingBackgroundColor
+        {
+            get => (Color)GetValue(RingBackgroundColorProperty);
+            set => SetValue(RingBackgroundColorProperty, value);
+        }
+
+        public static readonly BindableProperty UseShadedRingColorProperty = BindableProperty.Create(
+           nameof(UseShadedRingColor), typeof(bool), typeof(RingChartView), false, propertyChanged: RedrawCanvas);
+
+        public bool UseShadedRingColor
+        {
+            get => (bool)GetValue(UseShadedRingColorProperty);
+            set => SetValue(UseShadedRingColorProperty, value);
+        }
+
+        #endregion
+
+        #region CenterView
+
+        public static readonly BindableProperty CenterViewProperty = BindableProperty.Create(
+           nameof(CenterView), typeof(View), typeof(RingChartView), null, propertyChanged: null);
+
+        public View CenterView
+        {
+            get => (View)GetValue(CenterViewProperty);
+            set => SetValue(CenterViewProperty, value);
+        }
+
+        #endregion
+
+        #endregion
         public RingChartView()
 		{
             HorizontalOptions = LayoutOptions.Fill;
@@ -53,7 +91,7 @@ namespace DSoft.XamarinForms.Controls
             var currentPosy = this.Height / 2;
             var newSize = this.Width - (this.Width / 3);
 
-            //_container.Content = CenterContent;
+            _container.Content = CenterView;
             _container.LayoutTo(new Rectangle(currentPosX - (newSize / 2), currentPosy - (newSize / 2), newSize, newSize), 0, Easing.Linear);
         }
 
@@ -62,7 +100,6 @@ namespace DSoft.XamarinForms.Controls
             RingChartView self = bindable as RingChartView;
             self?._canvasView.InvalidateSurface();
         }
-
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
@@ -98,7 +135,7 @@ namespace DSoft.XamarinForms.Controls
             //Main rect
             var rect = new SKRect(backleft, backtop, backright, backbottom);
 
-            var mainBackColor = Color.FromHex("#ebeced");
+            //var mainBackColor = Color.FromHex("#ebeced");
 
             var colors = new List<Color>()
             {
@@ -107,15 +144,12 @@ namespace DSoft.XamarinForms.Controls
                 Color.FromHex("9686c9"),
                 Color.FromHex("e58870"),
                 Color.FromHex("47ba9f"),
-                
-                
-                
             };
 
             for (var loop = 0; loop < percentages.Length; loop++)
 			{
                 var foreColor = colors[loop];// Color.FromHex("#22b9e2");
-                var backColor = mainBackColor;// Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f);
+                var backColor = (UseShadedRingColor == true) ? Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f) : RingBackgroundColor;
 
                 DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, percentages[loop]);
 
