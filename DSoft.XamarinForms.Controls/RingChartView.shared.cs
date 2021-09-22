@@ -7,8 +7,8 @@ using Xamarin.Forms;
 
 namespace DSoft.XamarinForms.Controls
 {
-	public class RingChartView : ContentView
-	{
+    public class RingChartView : ContentView
+    {
         #region fields and Properties
         private List<DataEntryInternal> _internalData = new List<DataEntryInternal>();
 
@@ -25,6 +25,8 @@ namespace DSoft.XamarinForms.Controls
             CornerRadius = 20,
             HasShadow = false,
             BackgroundColor = Color.Transparent,
+            BorderColor = Color.Transparent,
+            Padding = new Thickness(0, 0, 0, 0),
         };
 
         //public double CurrentSweep => EndAngle * (Percent / 100);
@@ -66,12 +68,12 @@ namespace DSoft.XamarinForms.Controls
             set => SetValue(CenterViewProperty, value);
         }
 
-		#endregion
+        #endregion
 
-		#region ItemsSource
+        #region ItemsSource
 
 
-		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
             typeof(IList),
             typeof(RingChartView),
             null,
@@ -92,7 +94,7 @@ namespace DSoft.XamarinForms.Controls
                 return;
 
             RingChartView self = bindable as RingChartView;
-            
+
 
             self?.UpdateInternalData((IList)newValue);
 
@@ -130,7 +132,7 @@ namespace DSoft.XamarinForms.Controls
         #endregion
         #endregion
         public RingChartView()
-		{
+        {
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
 
@@ -142,7 +144,7 @@ namespace DSoft.XamarinForms.Controls
                 VerticalOptions = LayoutOptions.Fill,
             };
 
-            
+
             grid.Children.Add(_container);
             grid.Children.Add(_canvasView);
 
@@ -184,10 +186,10 @@ namespace DSoft.XamarinForms.Controls
             var innerHeight = 0d;
 
             if (_container.Content != null)
-			{
+            {
                 innerWidth = _container.Content.Width * scale;
                 innerHeight = _container.Content.Height * scale;
-			}
+            }
 
             var centerx = surfaceWidth / 2;
             var centery = surfaceHeight / 2;
@@ -199,7 +201,7 @@ namespace DSoft.XamarinForms.Controls
 
             var size = initialRadius - (innerRadius * 1.33);
 
-            var maxlineWidth = (RingLineWidth > 0) ? (float)RingLineWidth :  (float)(size / 2) / itemCount;
+            var maxlineWidth = (RingLineWidth > 0) ? (float)RingLineWidth : (float)(size / 2) / itemCount;
 
             var buffer = maxlineWidth;
 
@@ -214,7 +216,7 @@ namespace DSoft.XamarinForms.Controls
 
 
             for (var loop = 0; loop < _internalData.Count; loop++)
-			{
+            {
                 var currenEntry = _internalData[loop];
 
                 var foreColor = (currenEntry.Color.HasValue) ? currenEntry.Color.Value : GetColor(loop);
@@ -225,12 +227,12 @@ namespace DSoft.XamarinForms.Controls
 
                 rect.Inflate(new SKSize(-(maxlineWidth * 2), -(maxlineWidth * 2)));
             }
-            
-           
+
+
         }
 
         private void DrawRing(SKCanvas canvas, SKRect rect, SKColor backcolor, SKColor foreColor, float lineWidth, double percent)
-		{
+        {
             var CurrentSweep = EndAngle * (percent / 100);
 
             var ArcPaintBack = new SKPaint
@@ -298,7 +300,7 @@ namespace DSoft.XamarinForms.Controls
         }
 
         private void UpdateInternalData(IList data)
-		{
+        {
             _internalData = new List<DataEntryInternal>();
 
             if (data == null || data.Count == 0)
@@ -306,7 +308,7 @@ namespace DSoft.XamarinForms.Controls
 
             //work in reverse
             for (var loop = (data.Count - 1); loop > -1; loop--)
-			{
+            {
                 var item = data[loop];
 
                 var percentProp = item.GetType().GetProperty("Percent");
@@ -327,7 +329,7 @@ namespace DSoft.XamarinForms.Controls
                 }
 
                 if (valueProp != null && valueProp.PropertyType.Equals(typeof(double)))
-				{
+                {
                     var valValue = valueProp.GetValue(item);
 
                     realValue = (double)valValue;
@@ -367,15 +369,15 @@ namespace DSoft.XamarinForms.Controls
         }
 
         private Color GetColor(int index)
-		{
+        {
             if (index > (ColorPalette.Count - 1))
                 return Color.IndianRed;
 
             return ColorPalette[index];
         }
-		#region Internal classes
-		private class DataEntryInternal
-		{
+        #region Internal classes
+        private class DataEntryInternal
+        {
             public double Percent { get; set; }
 
             public double Value { get; set; }
@@ -386,9 +388,9 @@ namespace DSoft.XamarinForms.Controls
         }
 
         private class InternalColorModel
-		{
+        {
             public static List<Color> DefaultColors
-			{
+            {
                 get
                 {
                     var colors = new List<Color>()
@@ -413,10 +415,10 @@ namespace DSoft.XamarinForms.Controls
 
                     return colors;
                 }
-			}
-		}
+            }
+        }
 
-		#endregion
+        #endregion
 
-	}
+    }
 }
