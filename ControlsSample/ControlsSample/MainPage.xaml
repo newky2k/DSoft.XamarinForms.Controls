@@ -9,7 +9,7 @@
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="320" HeightRequest="400">
         <!-- Place new controls here -->
-        <controls:RingChartView ItemsSource="{Binding Data}" RingLineWidth="15">
+        <controls:RingChartView ItemsSource="{Binding Data}" RingLineWidth="15" HasDropShadow="False" DropShadowDepth="10">
             <controls:RingChartView.CenterView>
                 <Grid BackgroundColor="Red" VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="Hello" />

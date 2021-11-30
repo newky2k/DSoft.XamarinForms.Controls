@@ -108,7 +108,7 @@ namespace DSoft.XamarinForms.Controls
         #region Color Palette
 
         public static readonly BindableProperty ColorPaletteProperty = BindableProperty.Create(
-                            nameof(ColorPalette), typeof(IList<Color>), typeof(RingChartView), InternalColorModel.DefaultColors, propertyChanged: null);
+                            nameof(ColorPalette), typeof(IList<Color>), typeof(RingChartView), InternalColorModel.DefaultColors, propertyChanged: RedrawCanvas);
 
         public IList<Color> ColorPalette
         {
@@ -121,13 +121,37 @@ namespace DSoft.XamarinForms.Controls
         #region Max Line Size
 
         public static readonly BindableProperty RingLineWidthProperty = BindableProperty.Create(
-                            nameof(RingLineWidth), typeof(double), typeof(RingChartView), 0d, propertyChanged: null);
+                            nameof(RingLineWidth), typeof(double), typeof(RingChartView), 0d, propertyChanged: RedrawCanvas);
 
         public double RingLineWidth
         {
             get => (double)GetValue(RingLineWidthProperty);
             set => SetValue(RingLineWidthProperty, value);
         }
+
+        #endregion
+
+        #region Drop Shadow
+
+        public static readonly BindableProperty HasDropShadowProperty = BindableProperty.Create(
+            nameof(HasDropShadow), typeof(bool), typeof(RingChartView), true, propertyChanged: RedrawCanvas);
+
+        public bool HasDropShadow
+        {
+            get => (bool)GetValue(HasDropShadowProperty);
+            set => SetValue(HasDropShadowProperty, value);
+        }
+
+        public static readonly BindableProperty DropShadowDepthProperty = BindableProperty.Create(
+            nameof(DropShadowDepth), typeof(int), typeof(RingChartView), 2, propertyChanged: RedrawCanvas);
+
+        public int DropShadowDepth
+        {
+            get => (int)GetValue(DropShadowDepthProperty);
+            set => SetValue(DropShadowDepthProperty, value);
+        }
+
+
 
         #endregion
         #endregion
@@ -174,8 +198,14 @@ namespace DSoft.XamarinForms.Controls
         {
             //get the canvas & info
             var canvas = args.Surface.Canvas;
-            int surfaceWidth = args.Info.Width;
-            int surfaceHeight = args.Info.Height;
+            int surfaceWidth = args.Info.Width - 20;
+            int surfaceHeight = args.Info.Height - 20;
+
+            if (HasDropShadow == true)
+            {
+                surfaceWidth -= (DropShadowDepth * 2);
+                surfaceHeight -= (DropShadowDepth * 2);
+            }
 
             var scale = args.Info.Width / this.Width;
 
@@ -235,12 +265,15 @@ namespace DSoft.XamarinForms.Controls
         {
             var CurrentSweep = EndAngle * (percent / 100);
 
+
+
             var ArcPaintBack = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = lineWidth,
                 Color = backcolor,
                 IsAntialias = true,
+
             };
 
             var ArcPaintBackRound = new SKPaint
@@ -264,6 +297,14 @@ namespace DSoft.XamarinForms.Controls
                 Color = foreColor,
                 IsAntialias = true,
             };
+
+            if (HasDropShadow)
+            {
+                var RectangleStyleFillShadow = SKImageFilter.CreateDropShadow(0f, 0f, DropShadowDepth, DropShadowDepth, foreColor, SKDropShadowImageFilterShadowMode.DrawShadowAndForeground, null, null);
+                ArcPaintRound.ImageFilter = RectangleStyleFillShadow;
+                ArcPaint.ImageFilter = RectangleStyleFillShadow;
+
+            }
 
             var angle = Math.PI * (StartAngle + 0) / 180.0;
             var endangle = Math.PI * (StartAngle + EndAngle) / 180.0;
