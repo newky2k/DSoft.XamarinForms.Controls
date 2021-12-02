@@ -11,27 +11,28 @@ namespace ControlsSample
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-	public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage
     {
         private IEnumerable<DataEntry> _data = new List<DataEntry>();
 
-		public IEnumerable<DataEntry> Data
-		{
-			get { return _data; }
-			set { _data = value; OnPropertyChanged(nameof(Data)); }
-		}
-		public MainPage()
+        public IEnumerable<DataEntry> Data
+        {
+            get { return _data; }
+            set { _data = value; OnPropertyChanged(nameof(Data)); }
+        }
+        public MainPage()
         {
             InitializeComponent();
 
             BindingContext = this;
 
-			Data = new List<DataEntry>()
+            Data = new List<DataEntry>()
                 {
                     new DataEntry()
                     {
-                        Percent = 62.7,
+                        Percent = 91,
                         Label = "CO2",
+                        //Color = Color.Red,
                     },
                     new DataEntry()
                     {
@@ -47,6 +48,7 @@ namespace ControlsSample
                     {
                         Percent = 45.6,
                         Label = "Nox",
+                        //Color = Col
                     },
                     // new DataEntry()
                     //{

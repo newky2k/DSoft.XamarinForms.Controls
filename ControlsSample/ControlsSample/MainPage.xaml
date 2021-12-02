@@ -5,17 +5,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:DSoft.XamarinForms.Controls;assembly=DSoft.XamarinForms.Controls"
              mc:Ignorable="d"
+             BackgroundColor="Black"
              x:Class="ControlsSample.MainPage">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="320" HeightRequest="400">
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="320" HeightRequest="320">
         <!-- Place new controls here -->
-        <controls:RingChartView ItemsSource="{Binding Data}" RingLineWidth="15" HasDropShadow="False" DropShadowDepth="10">
+        <controls:SingleRingChartView Value="91" MinValue="50" RingLineWidth="12" HasDropShadow="True" DropShadowDepth="4" RingBackgroundColor="Gray">
+            <controls:SingleRingChartView.CenterView>
+                <Grid BackgroundColor="Red" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Hello" />
+                </Grid>
+            </controls:SingleRingChartView.CenterView>
+        </controls:SingleRingChartView>
+        <!--<controls:RingChartView ItemsSource="{Binding Data}" RingLineWidth="12" HasDropShadow="True" DropShadowDepth="4">
             <controls:RingChartView.CenterView>
                 <Grid BackgroundColor="Red" VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="Hello" />
                 </Grid>
             </controls:RingChartView.CenterView>
-        </controls:RingChartView>
+        </controls:RingChartView>-->
         <!--<controls:SimpleRadialGuageView WidthRequest="200"
                                         HeightRequest="200"
                                         Percent="10"

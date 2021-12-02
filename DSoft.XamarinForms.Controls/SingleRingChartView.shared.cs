@@ -7,11 +7,9 @@ using Xamarin.Forms;
 
 namespace DSoft.XamarinForms.Controls
 {
-    public class RingChartView : ContentView
+    public class SingleRingChartView : ContentView
     {
         #region fields and Properties
-        private List<DataEntryInternal> _internalData = new List<DataEntryInternal>();
-
         private double StartAngle = 270;
         private double EndAngle = 360;
 
@@ -38,7 +36,7 @@ namespace DSoft.XamarinForms.Controls
         #region ScaleBackgroundColor
 
         public static readonly BindableProperty RingBackgroundColorProperty = BindableProperty.Create(
-           nameof(RingBackgroundColor), typeof(Color), typeof(RingChartView), Color.FromHex("#ebeced"), propertyChanged: RedrawCanvas);
+           nameof(RingBackgroundColor), typeof(Color), typeof(SingleRingChartView), Color.FromHex("#ebeced"), propertyChanged: RedrawCanvas);
 
         public Color RingBackgroundColor
         {
@@ -46,8 +44,21 @@ namespace DSoft.XamarinForms.Controls
             set => SetValue(RingBackgroundColorProperty, value);
         }
 
+        #endregion
+
+        #region ScaleColor
+
+        public static readonly BindableProperty RingColorProperty = BindableProperty.Create(
+           nameof(RingColor), typeof(Color), typeof(SingleRingChartView), Color.FromHex("#ebeced"), propertyChanged: RedrawCanvas);
+
+        public Color RingColor
+        {
+            get => (Color)GetValue(RingColorProperty);
+            set => SetValue(RingColorProperty, value);
+        }
+
         public static readonly BindableProperty UseShadedRingColorProperty = BindableProperty.Create(
-           nameof(UseShadedRingColor), typeof(bool), typeof(RingChartView), false, propertyChanged: RedrawCanvas);
+           nameof(UseShadedRingColor), typeof(bool), typeof(SingleRingChartView), false, propertyChanged: RedrawCanvas);
 
         public bool UseShadedRingColor
         {
@@ -60,7 +71,7 @@ namespace DSoft.XamarinForms.Controls
         #region CenterView
 
         public static readonly BindableProperty CenterViewProperty = BindableProperty.Create(
-           nameof(CenterView), typeof(View), typeof(RingChartView), null, propertyChanged: null);
+           nameof(CenterView), typeof(View), typeof(SingleRingChartView), null, propertyChanged: null);
 
         public View CenterView
         {
@@ -72,56 +83,54 @@ namespace DSoft.XamarinForms.Controls
 
         #region ItemsSource
 
+        public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value),
+                                                                                        typeof(double),
+                                                                                        typeof(SingleRingChartView),
+                                                                                        0d,
+                                                                                        BindingMode.OneWay,
+                                                                                        propertyChanged: RedrawCanvas);
 
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
-            typeof(IList),
-            typeof(RingChartView),
-            null,
-            BindingMode.OneWay,
-            propertyChanged: ItemsChanged);
+        public static readonly BindableProperty MinValueProperty = BindableProperty.Create(nameof(MinValue),
+                                                                                typeof(double),
+                                                                                typeof(SingleRingChartView),
+                                                                                0d,
+                                                                                BindingMode.OneWay,
+                                                                                propertyChanged: RedrawCanvas);
 
-        public IList ItemsSource
+        public static readonly BindableProperty MaxValueProperty = BindableProperty.Create(nameof(MaxValue),
+                                                                                typeof(double),
+                                                                                typeof(SingleRingChartView),
+                                                                                100d,
+                                                                                BindingMode.OneWay,
+                                                                                propertyChanged: RedrawCanvas);
+
+
+        public double Value
         {
-            get => GetValue(ItemsSourceProperty) as IList;
-            set => SetValue(ItemsSourceProperty, value);
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
-        private static void ItemsChanged(BindableObject bindable, object oldValue, object newValue)
+
+        public double MinValue
         {
-
-
-            if (!(bindable is RingChartView))
-                return;
-
-            RingChartView self = bindable as RingChartView;
-
-
-            self?.UpdateInternalData((IList)newValue);
-
-
-            self?._canvasView.InvalidateSurface();
+            get => (double)GetValue(MinValueProperty);
+            set => SetValue(MinValueProperty, value);
         }
 
-        #endregion
-
-
-        #region Color Palette
-
-        public static readonly BindableProperty ColorPaletteProperty = BindableProperty.Create(
-                            nameof(ColorPalette), typeof(IList<Color>), typeof(RingChartView), InternalColorModel.DefaultColors, propertyChanged: RedrawCanvas);
-
-        public IList<Color> ColorPalette
+        public double MaxValue
         {
-            get => (IList<Color>)GetValue(ColorPaletteProperty);
-            set => SetValue(ColorPaletteProperty, value);
+            get => (double)GetValue(MaxValueProperty);
+            set => SetValue(MaxValueProperty, value);
         }
+
 
         #endregion
 
         #region Max Line Size
 
         public static readonly BindableProperty RingLineWidthProperty = BindableProperty.Create(
-                            nameof(RingLineWidth), typeof(double), typeof(RingChartView), 0d, propertyChanged: RedrawCanvas);
+                            nameof(RingLineWidth), typeof(double), typeof(SingleRingChartView), 0d, propertyChanged: RedrawCanvas);
 
         public double RingLineWidth
         {
@@ -134,7 +143,7 @@ namespace DSoft.XamarinForms.Controls
         #region Drop Shadow
 
         public static readonly BindableProperty HasDropShadowProperty = BindableProperty.Create(
-            nameof(HasDropShadow), typeof(bool), typeof(RingChartView), true, propertyChanged: RedrawCanvas);
+            nameof(HasDropShadow), typeof(bool), typeof(SingleRingChartView), true, propertyChanged: RedrawCanvas);
 
         public bool HasDropShadow
         {
@@ -143,7 +152,7 @@ namespace DSoft.XamarinForms.Controls
         }
 
         public static readonly BindableProperty DropShadowDepthProperty = BindableProperty.Create(
-            nameof(DropShadowDepth), typeof(int), typeof(RingChartView), 2, propertyChanged: RedrawCanvas);
+            nameof(DropShadowDepth), typeof(int), typeof(SingleRingChartView), 2, propertyChanged: RedrawCanvas);
 
         public int DropShadowDepth
         {
@@ -158,7 +167,7 @@ namespace DSoft.XamarinForms.Controls
 
         #region Constructors
 
-        public RingChartView()
+        public SingleRingChartView()
         {
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
@@ -197,7 +206,7 @@ namespace DSoft.XamarinForms.Controls
 
         private static void RedrawCanvas(BindableObject bindable, object oldvalue, object newvalue)
         {
-            RingChartView self = bindable as RingChartView;
+            var self = bindable as SingleRingChartView;
             self?._canvasView.InvalidateSurface();
         }
 
@@ -240,11 +249,10 @@ namespace DSoft.XamarinForms.Controls
                 innerRadius -= (DropShadowDepth * 2);
             }
 
-            var itemCount = _internalData.Count * 2;
 
             var size = initialRadius - (innerRadius * 1.33);
 
-            var maxlineWidth = (RingLineWidth > 0) ? (float)RingLineWidth : (float)(size / 2) / itemCount;
+            var maxlineWidth = (RingLineWidth > 0) ? (float)RingLineWidth : (float)(size / 2);
 
             var buffer = maxlineWidth;
 
@@ -261,24 +269,18 @@ namespace DSoft.XamarinForms.Controls
             var backright = backleft + backradius;
             var backbottom = backtop + backradius;
 
-
-
             //Main rect
             var rect = new SKRect(backleft, backtop, backright, backbottom);
 
+            var foreColor = RingColor;
 
-            for (var loop = 0; loop < _internalData.Count; loop++)
-            {
-                var currenEntry = _internalData[loop];
+            var backColor = (UseShadedRingColor == true) ? Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f) : RingBackgroundColor;
 
-                var foreColor = (currenEntry.Color.HasValue) ? currenEntry.Color.Value : GetColor(loop);
+            var perc = (Value - MinValue) / (MaxValue - MinValue) * 100;
 
-                var backColor = (UseShadedRingColor == true) ? Color.FromRgba(foreColor.R, foreColor.G, foreColor.B, 0.4f) : RingBackgroundColor;
+            DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, perc);
 
-                DrawRing(canvas, rect, backColor.ToSKColor(), foreColor.ToSKColor(), maxlineWidth, currenEntry.Percent);
-
-                rect.Inflate(new SKSize(-(maxlineWidth * 2), -(maxlineWidth * 2)));
-            }
+            rect.Inflate(new SKSize(-(maxlineWidth * 2), -(maxlineWidth * 2)));
 
 
         }
@@ -362,129 +364,9 @@ namespace DSoft.XamarinForms.Controls
             }
         }
 
-        private void UpdateInternalData(IList data)
-        {
-            _internalData = new List<DataEntryInternal>();
-
-            if (data == null || data.Count == 0)
-                return;
-
-            //work in reverse
-            for (var loop = (data.Count - 1); loop > -1; loop--)
-            {
-                var item = data[loop];
-
-                var percentProp = item.GetType().GetProperty("Percent");
-                var valueProp = item.GetType().GetProperty("Value");
-                var labelProp = item.GetType().GetProperty("Label");
-                var colorProp = item.GetType().GetProperty("Color");
-
-                double realPerValue = 0;
-                double realValue = 0;
-                string realLabel = string.Empty;
-                Color? realColor = null;
-
-                if (percentProp != null && percentProp.PropertyType.Equals(typeof(double)))
-                {
-                    var percValue = percentProp.GetValue(item);
-
-                    realPerValue = (double)percValue;
-                }
-
-                if (valueProp != null && valueProp.PropertyType.Equals(typeof(double)))
-                {
-                    var valValue = valueProp.GetValue(item);
-
-                    realValue = (double)valValue;
-                }
-
-                if (labelProp != null && labelProp.PropertyType.Equals(typeof(string)))
-                {
-                    var labValue = labelProp.GetValue(item);
-
-                    realLabel = labValue as string;
-                }
-
-                if (colorProp != null && colorProp.PropertyType.Equals(typeof(Color?)))
-                {
-                    var labValue = colorProp.GetValue(item);
-
-                    if (labValue != null)
-                        realColor = (Color)labValue;
-                }
-                else if (colorProp != null && colorProp.PropertyType.Equals(typeof(Color)))
-                {
-                    var labValue = colorProp.GetValue(item);
-
-                    realColor = (Color)labValue;
-                }
-
-
-                _internalData.Add(new DataEntryInternal()
-                {
-                    Percent = realPerValue,
-                    Value = realValue,
-                    Label = realLabel,
-                    Color = realColor,
-                });
-            }
-
-        }
-
-        private Color GetColor(int index)
-        {
-            if (index > (ColorPalette.Count - 1))
-                return Color.IndianRed;
-
-            return ColorPalette[index];
-        }
-
         #endregion
 
-        #region Internal classes
-        private class DataEntryInternal
-        {
-            public double Percent { get; set; }
-
-            public double Value { get; set; }
-
-            public string Label { get; set; }
-
-            public Color? Color { get; set; }
-        }
-
-        private class InternalColorModel
-        {
-            public static List<Color> DefaultColors
-            {
-                get
-                {
-                    var colors = new List<Color>()
-                                {
-                                    Color.FromHex("e56590"),
-                                    Color.FromHex("9686c9"),
-                                    Color.FromHex("e58870"),
-                                    Color.FromHex("47ba9f"),
-                                     Color.FromHex("2e2157"),
-                                      Color.FromHex("760f56"),
-
-                                    Color.FromHex("8d88cb"),
-                                    Color.FromHex("fdcc41"),
-                                    Color.FromHex("c33716"),
-                                    Color.FromHex("ff010b"),
-
-                                    Color.FromHex("7c3f09"),
-                                    Color.FromHex("739f46"),
-                                    Color.FromHex("6c4874"),
-                                    Color.FromHex("690102"),
-                                };
-
-                    return colors;
-                }
-            }
-        }
-
-        #endregion
 
     }
 }
+
