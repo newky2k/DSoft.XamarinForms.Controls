@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSoft.XamarinForms.Controls", "DSoft.XamarinForms.Controls\DSoft.XamarinForms.Controls.csproj", "{D8F76ADD-4EA8-49C5-8E7B-6551C87C5C3D}"
 EndProject
@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsSample.Android", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsSample.iOS", "ControlsSample\ControlsSample.iOS\ControlsSample.iOS.csproj", "{2BB9366C-AC08-4612-8ABA-4B9EFF255F6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsSample", "ControlsSample\ControlsSample\ControlsSample.csproj", "{D8F9F194-50F1-48C7-8734-984A1904379B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlsSample", "ControlsSample\ControlsSample\ControlsSample.csproj", "{D8F9F194-50F1-48C7-8734-984A1904379B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSoft.Maui.Controls", "DSoft.Maui.Controls\DSoft.Maui.Controls.csproj", "{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,30 @@ Global
 		{D8F9F194-50F1-48C7-8734-984A1904379B}.Release|x64.Build.0 = Release|Any CPU
 		{D8F9F194-50F1-48C7-8734-984A1904379B}.Release|x86.ActiveCfg = Release|Any CPU
 		{D8F9F194-50F1-48C7-8734-984A1904379B}.Release|x86.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|ARM.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|x64.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Debug|x86.Build.0 = Debug|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|ARM.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|ARM.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|iPhone.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|x64.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|x64.Build.0 = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|x86.ActiveCfg = Release|Any CPU
+		{03AAB0DD-0A7D-4BD2-93AB-A4F513A3F562}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
