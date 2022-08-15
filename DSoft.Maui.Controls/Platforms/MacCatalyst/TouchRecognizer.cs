@@ -1,10 +1,14 @@
 ﻿using CoreGraphics;
 using Foundation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UIKit;
 
 namespace DSoft.Maui.Controls.TouchTracking
 {
-	// All the code in this file is only included on iOS.
 	class TouchRecognizer : UIGestureRecognizer
 	{
 
