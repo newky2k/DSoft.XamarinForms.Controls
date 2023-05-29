@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;uap10.0.18362;</TargetFrameworks>
 		<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;</TargetFrameworks>

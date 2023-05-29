@@ -147,12 +147,6 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ControlsSample\ControlsSample.csproj">
-      <Project>{36E9C42F-D8E4-43A8-B15D-50F1E2AE725A}</Project>
-      <Name>ControlsSample</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

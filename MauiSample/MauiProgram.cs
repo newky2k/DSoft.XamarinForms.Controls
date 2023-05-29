@@ -1,4 +1,6 @@
-﻿namespace MauiSample
+﻿using DSoft.Maui.Controls.TouchTracking;
+
+namespace MauiSample
 {
 	public static class MauiProgram
 	{
@@ -14,8 +16,9 @@
 				})
 				.ConfigureEffects(effects =>
 				{
+					effects.Add<TouchEffect, TouchPlatformEffect>();
 
-				});
+                });
 
 			return builder.Build();
 		}

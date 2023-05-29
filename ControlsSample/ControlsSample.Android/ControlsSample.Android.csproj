@@ -16,7 +16,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
@@ -32,6 +32,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,16 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ControlsSample\ControlsSample.csproj">
-      <Project>{D8F9F194-50F1-48C7-8734-984A1904379B}</Project>
-      <Name>ControlsSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DSoft.XamarinForms.Controls\DSoft.XamarinForms.Controls.csproj">
-      <Project>{D8F76ADD-4EA8-49C5-8E7B-6551C87C5C3D}</Project>
-      <Name>DSoft.XamarinForms.Controls</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

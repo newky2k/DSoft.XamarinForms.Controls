@@ -127,14 +127,4 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\ControlsSample\ControlsSample.csproj">
-      <Project>{D8F9F194-50F1-48C7-8734-984A1904379B}</Project>
-      <Name>ControlsSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DSoft.XamarinForms.Controls\DSoft.XamarinForms.Controls.csproj">
-      <Project>{D8F76ADD-4EA8-49C5-8E7B-6551C87C5C3D}</Project>
-      <Name>DSoft.XamarinForms.Controls</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
